@@ -1,0 +1,13 @@
+from collections import Counter
+
+class Solution:
+    def commonChars(self, words):
+        # Start with the character count of the first word
+        common = Counter(words[0])
+        
+        # Intersect with character counts of the rest
+        for word in words[1:]:
+            common &= Counter(word)
+        
+        # Expand the counter into a list of characters
+        return list(common.elements())
