@@ -1,0 +1,24 @@
+#include <stdbool.h>
+
+bool isCovered(int** ranges, int rangesSize, int* rangesColSize, int left, int right) {
+    // Create an array to mark covered numbers (1 to 50)
+    bool covered[51] = {false};
+
+    // Mark all numbers covered by the ranges
+    for (int i = 0; i < rangesSize; i++) {
+        int start = ranges[i][0];
+        int end = ranges[i][1];
+        for (int j = start; j <= end; j++) {
+            covered[j] = true;
+        }
+    }
+
+    // Check if all numbers from left to right are covered
+    for (int i = left; i <= right; i++) {
+        if (!covered[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
