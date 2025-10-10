@@ -1,0 +1,27 @@
+#include <vector>
+#include <unordered_map>
+
+class Solution {
+public:
+    int subarraySum(std::vector<int>& nums, int k) {
+        std::unordered_map<int, int> prefixSums;
+        prefixSums[0] = 1;  // To handle the case when prefixSum == k
+        
+        int count = 0;
+        int prefixSum = 0;
+        
+        for (int num : nums) {
+            prefixSum += num;
+            
+            // Check if there is a prefixSum that we can subtract to get sum k
+            if (prefixSums.find(prefixSum - k) != prefixSums.end()) {
+                count += prefixSums[prefixSum - k];
+            }
+            
+            // Record the current prefixSum
+            prefixSums[prefixSum]++;
+        }
+        
+        return count;
+    }
+};
